@@ -20,6 +20,8 @@
   </ion-header>
 
   <ion-list>
-    <app-user-card *ngFor="let user of getUsers()" [user]="user"></app-user-card>
+    <ng-container *ngIf="(users$ | async) as users">
+      <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+    </ng-container>
   </ion-list>
 </ion-content>

@@ -1,6 +1,6 @@
 export interface IUser {
   ok: boolean;
-  user: {
+  user: {s
     id: string;
     team_id: string;
     name: string;
@@ -33,7 +33,7 @@ export interface IUser {
       image_192: string;
       image_512: string;
       team: string;
-    }
+    };
     is_admin: boolean;
     is_owner: boolean;
     is_primary_owner: boolean;
@@ -46,5 +46,14 @@ export interface IUser {
     is_invited_user: boolean;
     has_2fa: boolean;
     locale: string;
-  }
+  };
+}
+
+export interface IUserList {
+  ok: boolean;
+  members: IUser[];
+  cache_ts: number;
+  response_metadata: {
+    next_cursor: string;
+  };
 }
