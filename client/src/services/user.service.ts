@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IUser, IUserList } from '../models/user.models';
-import { slackToken } from '../../.private';
+import { IUser } from '../models/user.models';
 import { tap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -9,21 +8,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  static readonly url = 'https://slack.com/api';
+  static readonly url = 'http://42ca1c959eb9.ngrok.io';
   public users: IUser[] = [];
 
   constructor(private httpClient: HttpClient) {}
 
   getUsers(): Observable<IUser[]> {
-    return this.httpClient
-      .get(UserService.url + '/users.list', {
-        headers: { Authorization: `Bearer ${slackToken}` },
+    return this.httpClient.get(UserService.url + '/users').pipe(
+      map((users: IUser[]) => {
+        const noBot = users
+          .filter((memb) => !memb.is_bot)
+          .filter((m) => m.id !== 'USLACKBOT' && m.id !== 'U01FH2JSUPQ');
+        return noBot;
       })
-      .pipe(
-        tap((users) => console.log(users)),
-        map((users: IUserList) =>
-          users.members.filter((memb) => !memb.user.is_bot)
-        )
-      );
+    );
   }
 }
