@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { slackToken } = require('../client/.private.ts');
+const slackToken = require('./.private.js');
 
 exports.enableEvent = async function (req, res) {
   try {
@@ -23,7 +23,8 @@ exports.event = async function (req, res) {
 exports.users = async function (req, res) {
   try {
     const users = await fetch('https://slack.com/api/users.list', {headers: { 'Authorization': `Bearer ${slackToken}`}});
-    res.send(users.members);
+    const response = await users.json();
+    res.send(response.members);
   } catch (e) {
     res.status(500).send(e);
   }
