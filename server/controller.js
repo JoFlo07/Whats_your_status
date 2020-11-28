@@ -14,6 +14,8 @@ exports.enableEvent = async function (req, res) {
 
 exports.event = async function (req, res) {
   try {
+    // RECEIVE POST
+    req.io.broadcast.emit('update')
     console.log(req.body);
   } catch (e) {
     res.status(500).send(e);
