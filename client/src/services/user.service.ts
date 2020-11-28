@@ -17,7 +17,7 @@ export class UserService {
   getUsers(): Observable<IUser[]> {
     return this.httpClient
       .get(UserService.url + '/users.list', {
-        headers: { Authorization: `Bearer ${slackToken}`, 'Conten-Type': ''  },
+        headers: { Authorization: `Bearer ${slackToken}` },
       })
       .pipe(
         tap((users) => console.log(users)),
