@@ -1,11 +1,15 @@
 const express = require('express');
+const app = express();
+const http = require('http');
 const cors = require('cors');
 const router = require('./router');
-const socketio = require('socket.io');
-
-const app = express();
-const server = http.createServer(app.callback());
-const io = socketio(server);
+const server = http.createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST"]
+  }
+});
 
 io.on('connection', (socket) => {
   console.log('a user connected'); // eslint-disable-line no-console
