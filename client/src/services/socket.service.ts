@@ -5,7 +5,7 @@ import * as io from "socket.io-client";
   providedIn: "root",
 })
 export class SocketService {
-  static readonly url = "http://42ca1c959eb9.ngrok.io";
+  static readonly url = "http://42ca1c959eb9.ngrok.io/";
   socket;
   constructor() {}
   setupSocketConnection() {
