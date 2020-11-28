@@ -1,4 +1,7 @@
 <ion-item *ngIf="user">
+<ion-avatar>
+  <img [src]="user.profile.image_32">
+</ion-avatar>
   <ion-label class="ion-text-wrap">
     <h1>
       {{ user.real_name }}

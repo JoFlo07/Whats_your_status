@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.socketService.setupSocketConnection();
+    //this.socketService.setupSocketConnection();
   }
 
   initializeApp() {
